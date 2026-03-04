@@ -62,18 +62,19 @@
        ========================= */
     .header { background: #ffffff; padding: 15px 20px 25px 20px; border-bottom-left-radius: 36px; border-bottom-right-radius: 36px; position: sticky; top: 0; box-shadow: var(--shadow-draw); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; height: 90px; border-bottom: 3px dashed #bae6fd; z-index: 100; box-sizing: border-box; }
     .header-icon { width: 40px; height: 40px; background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.1rem; transform: rotate(-5deg); margin-right: 10px; flex-shrink: 0; }
-    .header-title h5 { margin: 0; font-size: 1rem; color: var(--primary-dark); line-height: 1.2; font-weight: 900; }
+    .header-title h5 { margin: 0; font-size: 1rem; color: var(--primary-dark); line-height: 1.2; font-weight: 900; white-space: nowrap; }
     .header-title small { color: var(--text-light); font-size: 0.75rem; font-family: var(--font-hand); }
     
     /* 心跳監控燈 (Heartbeat Monitor) */
-    .sync-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; cursor: pointer; transition: 0.3s; }
+    .sync-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
     .sync-green { background-color: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.6); animation: pulseGreen 2s infinite; }
     .sync-yellow { background-color: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); animation: pulseYellow 1s infinite; }
     .sync-red { background-color: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.8); }
     @keyframes pulseGreen { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
     @keyframes pulseYellow { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
-    .btn-header { background: #fff; border: 2px solid #e2e8f0; color: var(--text-body); font-weight: 700; font-family: var(--font-hand); font-size: 0.8rem; padding: 6px 12px; box-shadow: 2px 2px 0 #e2e8f0; border-radius: 16px; transition: 0.1s; display: flex; align-items: center; cursor: pointer; text-decoration: none; }
+    /* 修正文字掉尾問題：加入 white-space: nowrap */
+    .btn-header { background: #fff; border: 2px solid #e2e8f0; color: var(--text-body); font-weight: 700; font-family: var(--font-hand); font-size: 0.8rem; padding: 6px 12px; box-shadow: 2px 2px 0 #e2e8f0; border-radius: 16px; transition: 0.1s; display: flex; align-items: center; cursor: pointer; text-decoration: none; white-space: nowrap; }
     .btn-header:active { transform: translateY(2px); box-shadow: 0 0 0; }
 
     .container-custom { padding: 10px 16px; max-width: 600px; margin: 0 auto; position: relative; z-index: 10; flex: 1 0 auto; width: 100%; box-sizing: border-box; padding-bottom: 100px; }
@@ -126,9 +127,9 @@
     .airline-group-card { background: #fdfdfd; border: 2px solid #bfdbfe; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 4px 0 rgba(191, 219, 254, 0.2); overflow: hidden; }
     .airline-header { background: #eff6ff; padding: 12px 16px; border-bottom: 2px solid #bfdbfe; display: flex; justify-content: space-between; align-items: center; }
     
-    /* 底部導覽列 */
+    /* 底部導覽列 (修正文字掉尾: white-space: nowrap) */
     .nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; border-top: 2px solid #e2e8f0; border-top-left-radius: 24px; border-top-right-radius: 24px; display: flex; justify-content: space-evenly; padding: 12px 0 25px 0; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
-    .nav-item { color: var(--text-light); font-size: 0.7rem; font-weight: 700; cursor: pointer; padding: 6px; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: var(--font-hand); flex: 1; border: none; background: none; }
+    .nav-item { color: var(--text-light); font-size: 0.75rem; font-weight: 700; cursor: pointer; padding: 6px; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: var(--font-hand); flex: 1; border: none; background: none; white-space: nowrap; }
     .nav-item .lucide { font-size: 1.4rem; margin-bottom: 2px; }
     .nav-item.active { color: var(--primary); }
     .nav-item.active .lucide { transform: translateY(-3px); transition: 0.2s; stroke-width: 2.5; }
@@ -183,7 +184,6 @@
     <symbol id="icon-warehouse" viewBox="0 0 24 24"><path d="M22 8.35V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.35A2 2 0 0 1 3.26 6.5l8-3.2a2 2 0 0 1 1.48 0l8 3.2A2 2 0 0 1 22 8.35Z"/><path d="M6 18h12"/><path d="M6 14h12"/><rect width="12" height="12" x="6" y="10"/></symbol>
     <symbol id="icon-map" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="icon-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
-    <symbol id="icon-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
     <symbol id="icon-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
     <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="icon-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></symbol>
@@ -786,25 +786,29 @@
                 let basePts = ctx.twdBase * 0.0088; // 基礎 0.88%
                 let bonusPts = 0;
                 
-                // 取得目前額度狀態 (v14.0 直觀金額控管)
+                // 取得目前額度狀態 (v14.0 直觀金額控管防溢位)
                 let limitKey = getLimitKey(ctx.db, 'hsbc_live', new Date());
                 let usedSpend = ctx.db.limits[limitKey]?.spend || 0; 
                 let selectedRemaining = Math.max(0, 29600 - usedSpend); // 精選剩餘可刷金額
                 let taskRemaining = Math.max(0, 20000 - usedSpend);     // 任務/亞洲剩餘可刷金額
 
                 let noteHtml = '';
+                let actualQuotaConsumed = 0; // 追蹤實際消耗的額度
                 
                 if(ctx.isLiveSelect) { 
                     displayType = '精選'; 
                     // 精選加碼 3% (上限888點 -> $29600)
                     let eligibleSelectedSpend = Math.min(ctx.twdBase, selectedRemaining);
                     bonusPts += eligibleSelectedSpend * 0.03;
+                    actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleSelectedSpend);
+                    
                     if (eligibleSelectedSpend < ctx.twdBase) noteHtml += `<span class="text-danger fw-bold d-block">⚠️ 精選額度超過上限</span>`;
 
                     // 自動扣繳加碼 1% (上限200點 -> $20000)
                     if(ctx.db.settings?.hsbc_autopay) { 
                         let eligibleTaskSpend = Math.min(ctx.twdBase, taskRemaining);
                         bonusPts += eligibleTaskSpend * 0.01; 
+                        actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleTaskSpend);
                         displayType += '+自動扣繳';
                         if (eligibleTaskSpend < ctx.twdBase) noteHtml += `<span class="text-danger fw-bold d-block">⚠️ 任務加碼超限</span>`;
                     } 
@@ -813,18 +817,20 @@
                     if(isAsian5) { 
                         let eligibleAsiaSpend = Math.min(ctx.twdBase, taskRemaining);
                         bonusPts += eligibleAsiaSpend * 0.01; 
+                        actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleAsiaSpend);
                         displayType = '亞洲五國 5.88%'; 
                     } 
                 } else if(ctx.db.settings?.hsbc_autopay) { 
                     let eligibleTaskSpend = Math.min(ctx.twdBase, taskRemaining);
                     bonusPts += eligibleTaskSpend * 0.01; 
+                    actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleTaskSpend);
                     displayType='一般+任務'; 
                 } 
                 
                 let totalMiles = Math.trunc(basePts + bonusPts) * 2; // 1積分 = 2哩
                 let finalNote = `${displayType} <small>1點=2哩</small>` + (noteHtml ? `<br>${noteHtml}` : '');
                 
-                return { miles: totalMiles, note: finalNote, consumedQuota: ctx.twdBase, isWarning: noteHtml !== '' }; 
+                return { miles: totalMiles, note: finalNote, consumedQuota: actualQuotaConsumed, isWarning: noteHtml !== '' }; 
             } 
         },
         'taishin_cx': { 
@@ -929,7 +935,7 @@
         });
         db.customCards.forEach(c => {
             let div = ctx.isForeign ? c.forRate : c.domRate;
-            currentResults.push({ id: c.id, name: c.name, miles: Math.trunc(ctx.twdBase/div), note: `自訂 $${div}/哩`, consumedQuota: 0, twdSpend, twdBase });
+            currentResults.push({ id: c.id, name: c.name, miles: Math.trunc(ctx.twdBase/div), note: `自訂 $${div}/哩`, consumedQuota: ctx.twdBase, twdSpend, twdBase });
         });
         
         if (amt < 0) currentResults.sort((a,b) => a.miles - b.miles);
@@ -943,7 +949,7 @@
         document.getElementById('result-area').style.display = 'block';
         list.forEach((c, idx) => {
             const isWinner = idx === 0 && !c.isWarning; 
-            const integrityColor = c.id.includes('hsbc') || c.id.includes('taishin') ? '#10b981' : '#10b981'; // v14.0 皆已對齊官方規則
+            const integrityColor = '#10b981'; // v14.0 皆已對齊官方規則
             const integrityText = '🟢 數據已核實';
 
             const div = document.createElement('div'); div.className = `plan-card ${isWinner ? 'plan-winner' : ''} ${c.isWarning ? 'plan-warning' : ''}`;
@@ -978,10 +984,11 @@
 
         let kwNote = document.getElementById('keyword-input').value || '一般消費';
         if(isManual) kwNote += ` (微調: 原算 ${originalMiles})`;
-        if(item.twdBase < 0) kwNote = `(退刷沖帳) ${kwNote}`;
+        if(item.twdBase < 0) kwNote = `(退刷) ${kwNote}`;
 
         db.records[monthKey][txId] = { id: item.id, name: item.name, spend: item.twdBase, consumedQuota: item.consumedQuota, miles: points, unit: unitText, note: kwNote };
 
+        // 寫入上限管家額度 (退刷為負數會自動歸還額度)
         const limitKey = getLimitKey(db, item.id, now);
         if(!db.limits[limitKey]) db.limits[limitKey] = { spend:0, points:0 };
         
@@ -1016,8 +1023,35 @@
     }
 
     // ==========================================
-    // 5. 明細與資產管理
+    // 5. 監控總帳、明細與資產管理
     // ==========================================
+    function renderStatus() {
+        const db = loadDB(); const now = new Date(); const monthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+        const data = db.records[monthKey] || {}; const agg = {};
+        for(let key in data) { const r = data[key]; if(!agg[r.id]) agg[r.id] = { name: r.name, spend: 0, miles: 0, unit: r.unit }; agg[r.id].spend += r.spend; agg[r.id].miles += r.miles; }
+        
+        const statusCon = document.getElementById('status-container'); if(!statusCon) return;
+        if(Object.keys(agg).length === 0) statusCon.innerHTML = '<div class="text-center py-3 text-muted font-hand fw-bold">本月尚無累積</div>';
+        else {
+            let h = '';
+            for(let id in agg) {
+                const item = agg[id];
+                h += `<div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom"><div><div class="fw-bold text-dark mb-1">${item.name}</div><div class="text-muted small">$${item.spend.toLocaleString()}</div></div><div class="text-primary fw-bold fs-5">${item.miles.toLocaleString()} <small class="text-muted" style="font-size:0.6em">${item.unit}</small></div></div>`;
+            }
+            statusCon.innerHTML = h;
+        }
+
+        const limitsCon = document.getElementById('limits-container'); if(!limitsCon) return;
+        let lh = '';
+        (db.settings.enabledBuiltins || []).forEach(id => {
+            const limit = getLimitVal(id); if (limit >= 999999999) return;
+            const def = BUILTIN_DEFS.find(d=>d.id===id);
+            const lKey = getLimitKey(db, id, now); const curr = db.limits[lKey] ? db.limits[lKey].spend : 0; const pct = Math.min(100, Math.max(0, (curr/limit)*100));
+            lh += `<div class="mb-3"><div class="d-flex justify-content-between small mb-1"><strong>${def?def.name:id}</strong><span>$${curr.toLocaleString()} / $${limit.toLocaleString()}</span></div><div class="progress" style="height:8px; background-color:#fef3c7;"><div class="progress-bar ${pct>80?'bg-danger':'bg-warning'}" style="width:${pct}%"></div></div></div>`;
+        });
+        limitsCon.innerHTML = lh || '<div class="text-muted small">目前主力卡皆為無上限</div>';
+    }
+
     function renderList() {
         const db = loadDB(); const now = new Date(); const monthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
         const data = db.records[monthKey] || {}; const con = document.getElementById('transaction-list-container'); con.innerHTML = '';
@@ -1060,16 +1094,24 @@
         if(rec) { 
             const limitKey = getLimitKey(db, rec.id, new Date()); 
             let qToRestore = rec.consumedQuota !== undefined ? rec.consumedQuota : rec.spend;
-            if(db.limits[limitKey]) { db.limits[limitKey].spend -= qToRestore; } 
+            if(db.limits[limitKey]) { db.limits[limitKey].spend -= qToRestore; if(db.limits[limitKey].spend < 0) db.limits[limitKey].spend = 0; } 
             delete db.records[monthKey][txId]; 
-            saveDB(db); renderList(); 
+            saveDB(db); renderList(); renderStatus();
         }
     }
 
     function clearCurrentStats() { 
         if(!confirm('⚠️ 確定要重置本期所有數據嗎？\n（這會將本月相關的額度全部退還）')) return;
         const db = loadDB(); const now = new Date(); const monthKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-        if(db.records[monthKey]) { for(let id in db.records[monthKey]) { const rec = db.records[monthKey][id]; const limitKey = getLimitKey(db, rec.id, now); if(db.limits[limitKey]) { db.limits[limitKey].spend -= rec.spend; } } db.records[monthKey] = {}; saveDB(db); renderStatus(); }
+        if(db.records[monthKey]) { 
+            for(let id in db.records[monthKey]) { 
+                const rec = db.records[monthKey][id]; 
+                const limitKey = getLimitKey(db, rec.id, now); 
+                let qToRestore = rec.consumedQuota !== undefined ? rec.consumedQuota : rec.spend;
+                if(db.limits[limitKey]) { db.limits[limitKey].spend -= qToRestore; if(db.limits[limitKey].spend < 0) db.limits[limitKey].spend = 0; } 
+            } 
+            db.records[monthKey] = {}; saveDB(db); renderStatus(); renderList();
+        }
     }
 
     function batchImport() {
@@ -1080,7 +1122,7 @@
             const r = data[k]; const rule = AUTO_ASSETS[r.id];
             if(rule) { let asset = db.warehouse.find(a => a.targetAirline === rule.target); if(!asset) { asset = { type: rule.type, targetAirline: rule.target, name: rule.target, current: 0, unitPoints:rule.unitPoints, unitMiles:rule.unitMiles }; db.warehouse.push(asset); } asset.current += r.miles; }
         }
-        db.records[monthKey] = {}; saveDB(db); renderStatus(); showCustomAlert('✅ 已全部入庫！');
+        db.records[monthKey] = {}; saveDB(db); renderStatus(); renderList(); showCustomAlert('✅ 已全部入庫！');
     }
 
     function renderWarehouse() {
@@ -1145,6 +1187,10 @@
         document.getElementById('trip-label').innerText = isRt ? '來回 (Round-trip)' : '單程 (One-way)';
     }
 
+    function runPlannerCalc() {
+        // v14.0 規劃器前端事件樁
+    }
+
     async function startAIDiagnosis(mode) {
         const key = localStorage.getItem('GEMINI_API_KEY');
         const githubToken = localStorage.getItem('GITHUB_GIST_TOKEN');
@@ -1155,13 +1201,13 @@
         const contentBox = document.getElementById('ai-report-content');
         const modalTitle = document.getElementById('ai-modal-title');
 
-        modalTitle.innerHTML = mode === 'global' ? '<svg class="me-2" style="width:20px;height:20px;"><use href="#icon-sparkle"/></svg>全局資產價值指標 (戰略紫)' : '<svg class="me-2" style="width:20px;height:20px;"><use href="#icon-target"/></svg>指定航線達成方案 (精準藍)';
-        contentBox.innerHTML = '<div class="text-center py-5 text-muted"><div class="spinner-border text-primary mb-3"></div><br>正在執行 2026 實時政策審計與資產精算...</div>';
+        modalTitle.innerHTML = mode === 'global' ? '<svg class="me-2" style="width:20px;height:20px; color:#6d28d9;"><use href="#icon-sparkle"/></svg>全局資產價值指標 (戰略紫)' : '<svg class="me-2" style="width:20px;height:20px; color:#2563eb;"><use href="#icon-target"/></svg>指定航線達成方案 (精準藍)';
+        contentBox.innerHTML = '<div class="text-center py-5 text-muted"><div class="spinner-border text-primary mb-3"></div><br>正在連接 Gemini 大腦，執行實時政策審計與資產精算...</div>';
         reportModal.show();
 
         try {
             const db = loadDB();
-            let assetStr = db.warehouse.length === 0 ? '目前倉庫為空。' : db.warehouse.map(a => `- ${a.name}: ${a.current.toLocaleString()} (${a.targetAirline})`).join('\n');
+            let assetStr = db.warehouse.length === 0 ? '目前倉庫為空。' : db.warehouse.filter((_, idx) => plannerSelectedAssets.has(idx)).map(a => `- ${a.name}: ${a.current.toLocaleString()} (${a.targetAirline})`).join('\n');
             const fromStr = document.getElementById('planner-from').options[document.getElementById('planner-from').selectedIndex].text;
             const toStr = document.getElementById('planner-to').options[document.getElementById('planner-to').selectedIndex].text;
 
@@ -1171,9 +1217,9 @@
 
             const systemPrompt = `你是一名 2026 年頂尖航空哩程顧問。請以專業、客觀語氣進行分析。
             ${engineLogic}
-            資產清單：\n${assetStr}
+            勾選資產清單：\n${assetStr}
             
-            輸出要求 (純 JSON)：
+            輸出要求 (嚴格返回純 JSON 格式，不要加入 \`\`\`json 等任何 Markdown 標記)：
             {
               "level1_status": "一句話評估資產實力 (32px 大字)",
               "level2_audit": [{"item": "規則項", "old": "舊比例", "new": "新比例", "status": "已核實"}],
@@ -1190,51 +1236,60 @@
             if(!response.ok) throw new Error('API Request Failed');
             
             const data = await response.json();
-            let aiText = data.candidates[0].content.parts[0].text.replace(/```json/g, '').replace(/```/g, '').trim();
+            let aiText = data.candidates[0].content.parts[0].text;
+            
+            // 🛡️ 強制 JSON 萃取器：精準剪除所有 Markdown 符號
+            const jsonStart = aiText.indexOf('{');
+            const jsonEnd = aiText.lastIndexOf('}');
+            if (jsonStart !== -1 && jsonEnd !== -1) {
+                aiText = aiText.substring(jsonStart, jsonEnd + 1);
+            }
             const res = JSON.parse(aiText);
 
             contentBox.innerHTML = `
-                <div class="ai-level1-card mb-4 shadow-sm">
+                <div class="ai-level1-card mb-4 shadow-sm" style="${mode === 'global' ? 'background:#1e293b;' : 'background:#0f172a;'}">
                     <div class="text-muted small mb-1">全局資產價值指標</div>
-                    <div class="fw-bold" style="font-size: 1.5rem;">${res.level1_status}</div>
+                    <div class="fw-bold text-white" style="font-size: 1.3rem;">${res.level1_status}</div>
                 </div>
                 
-                <h6 class="fw-bold text-primary mb-3">實時政策規章審計 (L2)</h6>
+                <h6 class="fw-bold mb-3" style="color:#6d28d9;">實時政策規章審計 (L2)</h6>
                 <div class="mb-4">
                     ${res.level2_audit.map(a => `<div class="d-flex justify-content-between border-bottom py-2 small"><span>${a.item}</span><span><s class="text-danger">${a.old}</s> ➔ <span class="text-success fw-bold">${a.new}</span></span></div>`).join('')}
                 </div>
 
-                <h6 class="fw-bold text-primary mb-3">優化提案與路徑指引 (L3)</h6>
+                <h6 class="fw-bold mb-3" style="color:#6d28d9;">優化提案與路徑指引 (L3)</h6>
                 <div class="mb-4">
                     ${res.level3_routes.map(r => `
-                        <div class="card-box p-3 mb-3" style="background:#f8fafc;">
-                            <div class="fw-bold fs-6 mb-2">${r.title}</div>
+                        <div class="card-box p-3 mb-3 border-0 shadow-sm" style="background:#f8fafc;">
+                            <div class="fw-bold fs-6 mb-2 text-dark">${r.title}</div>
                             <div class="mb-2">${r.tags.map(t => `<span class="ai-tag ${t.includes('轉機')?'tag-hub':t.includes('地面')?'tag-ground':t.includes('哩程')?'tag-miles':'tag-tax'}">${t}</span>`).join('')}</div>
-                            <div class="d-flex justify-content-between small text-muted mb-1"><span>消耗: ${r.cost}</span><span>稅金: ${r.tax}</span></div>
-                            <div class="small text-secondary" style="line-height:1.5;">${r.desc}</div>
+                            <div class="d-flex justify-content-between small text-muted mb-1 fw-bold"><span>消耗: ${r.cost}</span><span>稅金: ${r.tax}</span></div>
+                            <div class="small text-secondary mt-2" style="line-height:1.5;">${r.desc}</div>
                         </div>
                     `).join('')}
                 </div>
 
                 <div class="ai-level4-box shadow-sm mb-4">
-                    <div class="mb-2">戰略決策推演：琥珀金補強 (L4)</div>
+                    <div class="mb-2 text-warning fw-bold">戰略決策推演：琥珀金補強 (L4)</div>
                     <div style="font-weight:normal;">${res.level4_decision}</div>
                 </div>
                 ${res.patch_json ? `<div class="mt-3"><label class="small text-danger fw-bold">維護者 JSON 補丁</label><div class="ai-json-patch">${res.patch_json}</div></div>` : ''}
             `;
         } catch (error) {
-            contentBox.innerHTML = '<div class="text-center py-5 text-danger fw-bold">⚠️ AI 診斷連線失敗或格式錯誤，請檢查您的金鑰。</div>';
+            contentBox.innerHTML = `<div class="text-center py-5 text-danger fw-bold">⚠️ AI 診斷連線失敗。<br><small class="text-muted fw-normal mt-2 d-block">請檢查金鑰或網路，錯誤代碼: ${error.message}</small></div>`;
         }
     }
 
-    // 初始化啟動
+    // ==========================================
+    // 🚀 系統初始化
+    // ==========================================
     window.onload = function() {
         const db = loadDB();
         const pendingCount = Object.keys(db.records[`${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`] || {}).length;
         document.getElementById('nav-badge-list').innerText = pendingCount;
         document.getElementById('nav-badge-list').style.display = pendingCount > 0 ? 'inline-block' : 'none';
         
-        // 預設選中全部資產以供規劃器使用
+        // 預設選中全部資產以供 AI 規劃器使用
         db.warehouse.forEach((_, idx) => plannerSelectedAssets.add(idx));
         
         switchPage('calc', document.querySelector('.nav-item'));
