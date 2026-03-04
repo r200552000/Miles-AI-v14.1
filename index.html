@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>TDC環哩匯X航空消費累哩工具（AI版） v14.0</title>
+  <title>TDC環哩匯X航空消費累哩工具（AI版） v14.0 終極修復版</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Mali:wght@500;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -62,6 +62,8 @@
        ========================= */
     .header { background: #ffffff; padding: 15px 20px 25px 20px; border-bottom-left-radius: 36px; border-bottom-right-radius: 36px; position: sticky; top: 0; box-shadow: var(--shadow-draw); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; height: 90px; border-bottom: 3px dashed #bae6fd; z-index: 100; box-sizing: border-box; }
     .header-icon { width: 40px; height: 40px; background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.1rem; transform: rotate(-5deg); margin-right: 10px; flex-shrink: 0; }
+    
+    /* 🛡️ 修正文字掉尾問題：加入 white-space: nowrap */
     .header-title h5 { margin: 0; font-size: 1rem; color: var(--primary-dark); line-height: 1.2; font-weight: 900; white-space: nowrap; }
     .header-title small { color: var(--text-light); font-size: 0.75rem; font-family: var(--font-hand); }
     
@@ -95,17 +97,18 @@
     .btn-action { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); color: white; font-weight: 700; border-radius: 50px; padding: 14px; width: 100%; border: none; font-size: 1.1rem; font-family: var(--font-hand); box-shadow: 3px 3px 0 rgba(59, 130, 246, 0.25); margin-top: 10px; border: 2px solid #bfdbfe; transition: 0.1s; cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
     .btn-action:active { transform: translateY(3px); box-shadow: 0 0 0; }
 
-    .switch-group { background: #f8fafc; padding: 10px 14px; border-radius: 16px; border: 2px solid #e2e8f0; box-shadow: 2px 2px 0 #e2e8f0; display: flex; align-items: center; justify-content: space-between; height: 100%; cursor: pointer; transition: 0.2s; box-sizing: border-box; }
+    /* 🛡️ 將 switch-group 設計為原生 Label 點擊區塊 */
+    .switch-group { background: #f8fafc; padding: 10px 14px; border-radius: 16px; border: 2px solid #e2e8f0; box-shadow: 2px 2px 0 #e2e8f0; display: flex; align-items: center; justify-content: space-between; height: 100%; cursor: pointer; transition: 0.2s; box-sizing: border-box; width: 100%; margin: 0; }
     
     /* 🛡️ 修正文字掉尾問題：加入 white-space: nowrap */
-    .switch-label { display: flex; align-items: center; gap: 4px; font-weight: bold; white-space: nowrap; }
+    .switch-label { display: flex; align-items: center; gap: 4px; font-weight: bold; white-space: nowrap; cursor: pointer; }
     
-    .form-check-input { width: 2.8em; height: 1.5em; background-color: #cbd5e1; border: 2px solid #cbd5e1; border-radius: 2em; cursor: pointer; pointer-events: none; appearance: none; position: relative; margin: 0; }
+    .form-check-input { width: 2.8em; height: 1.5em; background-color: #cbd5e1; border: 2px solid #cbd5e1; border-radius: 2em; cursor: pointer; pointer-events: auto; appearance: none; position: relative; margin: 0; }
     .form-check-input::before { content: ""; position: absolute; width: 1.1em; height: 1.1em; border-radius: 50%; top: 0.1em; left: 0.1em; background-color: white; transition: 0.2s; }
     .form-check-input:checked { background-color: var(--primary); border-color: var(--primary); }
     .form-check-input:checked::before { transform: translateX(1.3em); }
 
-    /* 計算結果卡片與雙按鈕設計 */
+    /* 計算結果卡片與雙按鈕設計 (加上防溢位紅框支援) */
     .plan-card { padding: 16px; border-radius: 18px; margin-top: 12px; border: 2px solid #f1f5f9; position: relative; background: #fff; box-shadow: 2px 2px 0 rgba(0,0,0,0.03); }
     .plan-winner { border-color: var(--primary); background: #f0f9ff; transform: rotate(-0.5deg); }
     .plan-warning { border-color: #fca5a5 !important; background: #fef2f2 !important; box-shadow: 2px 2px 0 #fecaca; }
@@ -163,8 +166,8 @@
     /* 卡片清單與新增卡片 */
     .custom-card-item { background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 
-    /* 絕對底端免責聲明 (15px字體 / 黑白金高對比) */
-    .footer-disclaimer { background-color: #1a1a1a; color: #e5e5e5; padding: 24px 20px 100px 20px; font-size: 15px; line-height: 1.6; text-align: justify; flex-shrink: 0; width: 100%; box-sizing: border-box; font-family: var(--font-main); font-weight: 500; }
+    /* 🛡️ 絕對底端免責聲明 (加大 padding-bottom 避免遮擋) */
+    .footer-disclaimer { background-color: #1a1a1a; color: #e5e5e5; padding: 24px 20px 120px 20px; font-size: 15px; line-height: 1.6; text-align: justify; flex-shrink: 0; width: 100%; box-sizing: border-box; font-family: var(--font-main); font-weight: 500; }
   </style>
 </head>
 <body>
@@ -217,16 +220,16 @@
       <div class="card-box">
         <div class="row mb-3">
           <div class="col-6">
-            <div class="switch-group" onclick="toggleSwitch('birthdayMode')" id="switch-box-birthdayMode" style="background:#fff1f2; border-color:#fecdd3; box-shadow: 2px 2px 0 #fecdd3;">
+            <label class="switch-group" id="switch-box-birthdayMode" style="background:#fff1f2; border-color:#fecdd3; box-shadow: 2px 2px 0 #fecdd3;">
               <span class="switch-label text-danger"><svg class="lucide"><use href="#icon-cake"/></svg> 生日月</span>
               <input class="form-check-input flex-shrink-0" type="checkbox" id="birthdayMode">
-            </div>
+            </label>
           </div>
           <div class="col-6">
-            <div class="switch-group" onclick="toggleSwitch('flyMode')" id="switch-box-flyMode" style="background:#ecfdf5; border-color:#a7f3d0; box-shadow: 2px 2px 0 #a7f3d0;">
+            <label class="switch-group" id="switch-box-flyMode" style="background:#ecfdf5; border-color:#a7f3d0; box-shadow: 2px 2px 0 #a7f3d0;">
               <span class="switch-label text-success"><svg class="lucide"><use href="#icon-ticket"/></svg> 越飛有哩</span>
               <input class="form-check-input flex-shrink-0" type="checkbox" id="flyMode">
-            </div>
+            </label>
           </div>
         </div>
         
@@ -391,10 +394,10 @@
                 <div class="col-6"><label class="form-label small fw-bold">選擇艙等</label><select id="planner-class" class="form-select" onchange="runPlannerCalc()"><option value="Y">💺 經濟艙</option><option value="C">🥂 商務艙</option><option value="F">👑 頭等艙</option></select></div>
               </div>
               
-              <div class="switch-group mb-2" onclick="togglePlannerTrip()">
+              <label class="switch-group mb-2">
                 <span class="switch-label fw-bold"><svg class="lucide me-1"><use href="#icon-rotate"/></svg> 行程：<span id="trip-label">來回 (Round-trip)</span></span>
-                <input class="form-check-input" type="checkbox" id="planner-trip-type" checked>
-              </div>
+                <input class="form-check-input" type="checkbox" id="planner-trip-type" checked onchange="togglePlannerTrip()">
+              </label>
             </div>
             
             <div class="mb-3 px-1 mt-3">
@@ -460,7 +463,7 @@
         <div class="px-2 mb-4">
           <div class="d-flex align-items-start mb-3"><div class="fw-bold me-2 mt-1" style="color:#8b5cf6;">●</div><div class="small"><b>全局巔峰推薦</b>：掃描所有資產，主動找出單哩價值最高的隱藏航線。</div></div>
           <div class="d-flex align-items-start mb-3"><div class="fw-bold me-2 mt-1" style="color:#8b5cf6;">●</div><div class="small"><b>指定路徑精算</b>：鎖定您的目的地，提供直飛、聯盟、套利等多種方案對比。</div></div>
-          <div class="d-flex align-items-start mb-3"><div class="fw-bold me-2 mt-1" style="color:#8b5cf6;">●</div><div class="small"><b>實時規章審計</b>：比對 2026 最新官方鐵律，主動糾正過時比例。</div></div>
+          <div class="d-flex align-items-start mb-3"><div class="fw-bold me-2 mt-1" style="color:#8b5cf6;">●</div><div class="small"><b>實時規章審計</b>：比對最新官方鐵律，主動糾正過時比例。</div></div>
         </div>
         <button class="btn btn-primary w-100 rounded-pill fw-bold font-hand py-2" style="background: var(--ai-purple); border:none; box-shadow: 0 4px 10px rgba(124,58,237,0.3);" onclick="goToSettingsFromAI()">前往設定解鎖</button>
       </div>
@@ -505,7 +508,10 @@
           </div>
           <div class="mb-4">
             <div class="fw-bold mb-2 text-primary">加碼資格確認</div>
-            <div class="switch-group mb-2"><span class="switch-label">匯豐 Live+ 自動扣繳 <small class="text-muted fw-normal">(精選+1%)</small></span><input class="form-check-input" type="checkbox" id="setting-hsbc-autopay"></div>
+            <label class="switch-group mb-2">
+                <span class="switch-label">匯豐 Live+ 自動扣繳 <small class="text-muted fw-normal">(精選+1%)</small></span>
+                <input class="form-check-input" type="checkbox" id="setting-hsbc-autopay">
+            </label>
           </div>
           <div class="mb-4">
             <div class="fw-bold mb-2 text-primary">內建神卡開關 (影響計算與監控)</div>
@@ -548,20 +554,20 @@
         </div>
         <div class="modal-body p-3 pt-0">
           <div class="p-3 mb-3" style="background-color: #f0f4f3; border-left: 5px solid #84a59d; border-radius: 12px;">
-              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#84a59d; font-size:1rem;">1</span><h6 class="fw-bold m-0" style="color:#2f4f4f;">計算與記帳</h6></div>
-              <p class="small text-muted m-0" style="line-height:1.6;">輸入消費金額與類別，系統將自動算出最優惠信用卡。點擊「開始計算」後，選擇最佳卡片按下「記帳」。外幣請輸入台銀匯率；退刷請點擊輸入框下方「退刷/修正」按鈕。</p>
+              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#84a59d; font-size:1rem;">1</span><h6 class="fw-bold m-0" style="color:#2f4f4f;">計算與記帳基礎</h6></div>
+              <p class="small text-muted m-0" style="line-height:1.6;">在首頁輸入消費金額與類別，系統將自動套用最新規章算出最優惠信用卡。點擊「開始計算」後，選擇最佳卡片按下「記帳」按鈕即可存入明細。若為外幣消費，請先選擇「🌎 外幣」並貼上台銀匯率，系統將自動為您試算折合台幣本金與 1.5% 手續費；如需退刷或修正上限額度，請點擊輸入框下方的「退刷/修正」按鈕。</p>
           </div>
           <div class="p-3 mb-3" style="background-color: #fcf4f3; border-left: 5px solid #e5989b; border-radius: 12px;">
-              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#e5989b; font-size:1rem;">2</span><h6 class="fw-bold m-0" style="color:#8a4f4f;">手動修正誤差</h6></div>
-              <p class="small text-muted m-0" style="line-height:1.6;">若系統計算因匯率差或四捨五入產生落差，請點擊結果卡片上的「✏️ 修正」按鈕，直接輸入您實際獲得的點數進行強制記帳。</p>
+              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#e5989b; font-size:1rem;">2</span><h6 class="fw-bold m-0" style="color:#8a4f4f;">神卡上限預警與手動修正</h6></div>
+              <p class="small text-muted m-0" style="line-height:1.6;">本工具內建匯豐 Live+ 加碼上限與台新國泰百萬防溢位機制，當您的消費超出卡片剩餘額度時，系統會顯示紅框並強制降級回饋率。若系統計算結果因匯率差或四捨五入產生微小落差，您可以點擊結果卡片上的「✏️ 修正」按鈕，直接輸入您帳單上實際獲得的點數進行強制記帳，以保證帳目 100% 精準。</p>
           </div>
           <div class="p-3 mb-3" style="background-color: #f0f4f8; border-left: 5px solid #95b8d1; border-radius: 12px;">
-              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#95b8d1; font-size:1rem;">3</span><h6 class="fw-bold m-0" style="color:#4a6fa5;">監控與一鍵進倉</h6></div>
-              <p class="small text-muted m-0" style="line-height:1.6;">結帳日後，請至「監控」分頁點擊「一鍵進倉」，系統會自動將本月累積的明細轉入您的「倉庫」中，並重置本期可用額度。</p>
+              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#95b8d1; font-size:1rem;">3</span><h6 class="fw-bold m-0" style="color:#4a6fa5;">監控結算與一鍵進倉</h6></div>
+              <p class="small text-muted m-0" style="line-height:1.6;">每到信用卡結帳日後，請至下方的「監控」分頁。您可以在這裡一覽本期各卡別的累積總額，確認無誤後點擊「一鍵進倉」，系統會自動將本月累積的所有明細，依據卡片特性轉化為對應的「航空哩程」或「轉點積分」並收納至「倉庫」中，同時重置本期可用額度，準備迎接下一個月的挑戰。</p>
           </div>
           <div class="p-3 mb-3" style="background-color: #f5f3ff; border-left: 5px solid #a855f7; border-radius: 12px;">
-              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#a855f7; font-size:1rem;">4</span><h6 class="fw-bold m-0" style="color:#5b21b6;">雙引擎 AI 戰略</h6></div>
-              <p class="small text-muted m-0" style="line-height:1.6;">前往「設定」貼上 Google Gemini API Key，即可在「倉庫 > 兌換試算」頁面解鎖 AI，進行全域盲測與指定航線的神仙提案！</p>
+              <div class="d-flex align-items-center mb-2"><span class="badge rounded-pill me-2" style="background:#a855f7; font-size:1rem;">4</span><h6 class="fw-bold m-0" style="color:#5b21b6;">雙引擎 AI 戰略與倉庫資產</h6></div>
+              <p class="small text-muted m-0" style="line-height:1.6;">您可以在「倉庫」手動存入飯店轉點積分（支援設定滿額加贈）。只要前往頂部齒輪「設定」貼上您的 Google Gemini API Key，即可在「倉庫 > 兌換試算」頁面解鎖 AI 雙引擎！勾選您要動用的資產，您不僅可以試算指定航線的預估哩程，更能點擊「戰略紫」按鈕進行全域盲測，或點擊「精準藍」獲取包含開口、轉機與後續刷卡建議的神仙提案！</p>
           </div>
         </div>
       </div>
@@ -667,7 +673,6 @@
         const val = parseFloat(el.value);
         if(val < 0) { el.classList.add('input-negative'); } else { el.classList.remove('input-negative'); }
     }
-    function toggleSwitch(id) { const cb = document.getElementById(id); cb.checked = !cb.checked; }
     function toggleFxInput(val) { document.getElementById('fx-input-group').style.display = (val === 'FOREIGN') ? 'block' : 'none'; }
     function updateKeywordPlaceholder() {
         const cat = document.getElementById('category').value;
@@ -720,7 +725,8 @@
         builtinCon.innerHTML = '';
         BUILTIN_DEFS.forEach(def => {
             const isChecked = (db.settings.enabledBuiltins || []).includes(def.id) ? 'checked' : '';
-            builtinCon.innerHTML += `<div class="switch-group mb-2"><span class="switch-label">${def.name}</span><input class="form-check-input" type="checkbox" onchange="toggleBuiltin('${def.id}', this.checked)" ${isChecked}></div>`;
+            // 🛡️ 修正：原生 Label 開關，點擊直接觸發 onchange
+            builtinCon.innerHTML += `<label class="switch-group mb-2"><span class="switch-label">${def.name}</span><input class="form-check-input" type="checkbox" onchange="toggleBuiltin('${def.id}', this.checked)" ${isChecked}></label>`;
         });
         const customCon = document.getElementById('custom-cards-list'); if(!customCon) return;
         customCon.innerHTML = '';
@@ -746,7 +752,7 @@
         return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${id}`;
     }
     function getLimitVal(id) { 
-        if(id==='hsbc_live') return 29600; // 精選 3% 上限 888 點 = $29,600
+        if(id==='hsbc_live') return 29600; // 精選 3% 上限 $29,600
         if(id==='hsbc_inf') return 999999999; 
         if(id==='ctbc_ci_inf') return 600000; 
         if(id==='taishin_cx') return 1000000; // 台新 100 萬上限監控
@@ -755,7 +761,7 @@
     }
 
     // ==========================================
-    // 3. 核心運算引擎 (v14.0 2026 最新校準版)
+    // 3. 核心運算引擎 (v14.0 絕對防禦降級版)
     // ==========================================
     const CARD_RULES = {
         'ctbc_ci_inf': { 
@@ -777,10 +783,13 @@
                     if (ctx.twdBase <= remaining) {
                         return { miles: Math.trunc(ctx.twdBase / div), note: (div===6.6 ? '🎂 生日海外實體 $6.6' : '✈️ 指定/海外 $10'), consumedQuota: ctx.twdBase };
                     } else {
+                        // 🛡️ 截斷降級機制
                         let bonusMiles = Math.trunc(remaining / div);
                         let baseMiles = Math.trunc((ctx.twdBase - remaining) / 20);
-                        let note = remaining === 0 ? `<span class="text-danger fw-bold">🚫 年度額度已滿 (降為 $20)</span>` : `<span class="text-danger fw-bold">⚠️ 部分超額 (剩 $${remaining.toLocaleString()})</span>`;
-                        return { miles: bonusMiles + baseMiles, note: note, consumedQuota: remaining, isWarning: true };
+                        let note = remaining === 0 
+                            ? `<span class="text-danger fw-bold d-block mt-1">⚠️ 年度額度已滿，已降為一般回饋 ($20/哩)</span>` 
+                            : `<span class="text-danger fw-bold d-block mt-1">⚠️ 單筆爆額度上限，超額部分僅享一般回饋 ($20/哩)</span>`;
+                        return { miles: bonusMiles + baseMiles, note: (div===6.6 ? '🎂 生日海外實體 $6.6' : '✈️ 指定/海外 $10') + note, consumedQuota: remaining, isWarning: true };
                     }
                 }
                 return { miles: Math.trunc(ctx.twdBase / 20), note: '一般消費 $20', consumedQuota: 0 }; 
@@ -789,46 +798,49 @@
         'hsbc_live': { 
             name: '匯豐 Live+', 
             calc: (ctx) => { 
-                // 歐盟實體不回饋
                 if (ctx.isEUR) return { miles:0, note: '<span class="text-danger">🚫 歐盟實體不回饋</span>', consumedQuota:0 }; 
                 if (HSBC_LIVE_BLOCK.some(w => ctx.kwKey.includes(w))) return { miles:0, note: '<span class="text-danger">🚫 非回饋項目</span>', consumedQuota:0 }; 
                 if (['apple_pay','line_pay'].includes(ctx.pay)) return { miles:0, note: '🚫 綁定行動支付無加碼', consumedQuota:0 }; 
 
-                // 2026 亞洲五國 5.88% 判定：外幣消費且指定國家
                 const asianCountries = ['JPY', 'KRW', 'SGD', 'MYR', 'VND']; 
                 let isAsian5 = ctx.isForeign && asianCountries.includes(ctx.curr);
 
                 let displayType = '一般 0.88%'; 
-                let basePts = ctx.twdBase * 0.0088; // 基礎 0.88%
+                let basePts = ctx.twdBase * 0.0088; // 基礎 0.88% 不受上限影響
                 let bonusPts = 0;
                 
-                // 取得目前額度狀態 (v14.0 精準消耗計算防溢位)
                 let limitKey = getLimitKey(ctx.db, 'hsbc_live', new Date());
                 let usedSpend = ctx.db.limits[limitKey]?.spend || 0; 
                 let selectedRemaining = Math.max(0, 29600 - usedSpend); 
                 let taskRemaining = Math.max(0, 20000 - usedSpend);     
 
                 let noteHtml = '';
-                let actualQuotaConsumed = 0; // 追蹤實際消耗的額度
+                let actualQuotaConsumed = 0; 
+                let isWarning = false;
                 
                 if(ctx.isLiveSelect) { 
                     displayType = '精選'; 
-                    // 精選加碼 3%
+                    // 🛡️ 截斷機制：合規部分算 3%，超出的部分直接捨棄加碼
                     let eligibleSelectedSpend = Math.min(ctx.twdBase, selectedRemaining);
                     bonusPts += eligibleSelectedSpend * 0.03;
                     actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleSelectedSpend);
-                    if (eligibleSelectedSpend < ctx.twdBase) noteHtml += `<span class="text-danger fw-bold d-block">⚠️ 精選額度超過上限</span>`;
+                    
+                    if (ctx.twdBase > selectedRemaining) {
+                        isWarning = true;
+                        noteHtml += `<span class="text-danger fw-bold d-block mt-1">⚠️ 單筆爆精選上限，超額部分僅享 0.88% 基礎回饋</span>`;
+                    }
 
-                    // 自動扣繳加碼 1%
                     if(ctx.db.settings?.hsbc_autopay) { 
                         let eligibleTaskSpend = Math.min(ctx.twdBase, taskRemaining);
                         bonusPts += eligibleTaskSpend * 0.01; 
                         actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleTaskSpend);
                         displayType += '+自動扣繳';
-                        if (eligibleTaskSpend < ctx.twdBase) noteHtml += `<span class="text-danger fw-bold d-block">⚠️ 任務加碼超限</span>`;
+                        if (ctx.twdBase > taskRemaining && !isWarning) {
+                            isWarning = true;
+                            noteHtml += `<span class="text-danger fw-bold d-block mt-1">⚠️ 單筆爆任務上限，超額部分僅享 0.88% 基礎回饋</span>`;
+                        }
                     } 
                     
-                    // 亞洲五國加碼 1%
                     if(isAsian5) { 
                         let eligibleAsiaSpend = Math.min(ctx.twdBase, taskRemaining);
                         bonusPts += eligibleAsiaSpend * 0.01; 
@@ -840,12 +852,16 @@
                     bonusPts += eligibleTaskSpend * 0.01; 
                     actualQuotaConsumed = Math.max(actualQuotaConsumed, eligibleTaskSpend);
                     displayType='一般+任務'; 
+                    if (ctx.twdBase > taskRemaining) {
+                        isWarning = true;
+                        noteHtml += `<span class="text-danger fw-bold d-block mt-1">⚠️ 單筆爆任務上限，超額部分僅享 0.88% 基礎回饋</span>`;
+                    }
                 } 
                 
                 let totalMiles = Math.trunc(basePts + bonusPts) * 2; 
-                let finalNote = `${displayType} <small>1點=2哩</small>` + (noteHtml ? `<br>${noteHtml}` : '');
+                let finalNote = `${displayType} <small>1點=2哩</small>` + noteHtml;
                 
-                return { miles: totalMiles, note: finalNote, consumedQuota: actualQuotaConsumed, isWarning: noteHtml !== '' }; 
+                return { miles: totalMiles, note: finalNote, consumedQuota: actualQuotaConsumed, isWarning: isWarning }; 
             } 
         },
         'taishin_cx': { 
@@ -859,12 +875,14 @@
                 if (ctx.cat === 'flight_cx' && !isMobilePay && !ctx.isForeign) { isBonus = true; }
                 else if (ctx.isFlyMode && ctx.cat !== 'flight_ci' && !isMobilePay && (['agoda','booking','klook'].some(w=>ctx.kwKey.includes(w)) || (ctx.isForeign && ctx.pay==='physical'))) { isBonus = true; }
 
-                // 2026 台新百萬年度限額監控
-                let limit1M = getLimitVal('taishin_cx'); // 1,000,000
+                let limit1M = getLimitVal('taishin_cx'); 
                 let used1M = ctx.db.limits[`${new Date().getFullYear()}-taishin_cx`]?.spend || 0;
                 let remaining1M = Math.max(0, limit1M - used1M);
+                let noteHtml = '';
                 
+                // 🛡️ 截斷機制：台新 100 萬防線
                 if (ctx.twdBase > remaining1M) {
+                     noteHtml = `<span class="text-danger fw-bold d-block mt-1">⚠️ 年度百萬額度已滿，超額部分僅享基礎回饋 ($${baseDiv}/哩)</span>`;
                      let validSpend = remaining1M;
                      let exceedSpend = ctx.twdBase - remaining1M;
                      let miles = 0;
@@ -873,7 +891,8 @@
                      } else {
                          miles = Math.trunc(ctx.twdBase / baseDiv); 
                      }
-                     return { miles: miles, note: `<span class="text-danger fw-bold">🚫 年度百萬額度已滿 (無推薦資格)</span>`, consumedQuota: validSpend, isWarning: true };
+                     let finalNote = (isBonus ? '越飛有哩 $5' : (ctx.isForeign ? '海外 $15' : '國內 $22')) + noteHtml;
+                     return { miles: miles, note: finalNote, consumedQuota: validSpend, isWarning: true };
                 }
 
                 if (isBonus) {
@@ -910,9 +929,14 @@
                     let remaining = Math.max(0, limit - used);
 
                     if (ctx.twdBase <= remaining) return { miles: Math.trunc(ctx.twdBase / div), note: noteBase, consumedQuota: ctx.twdBase };
+                    
+                    // 🛡️ 截斷機制
                     let bonusMiles = Math.trunc(remaining / div);
                     let baseMiles = Math.trunc((ctx.twdBase - remaining) / 18);
-                    return { miles: bonusMiles + baseMiles, note: `⚠️ 部分超額 (剩 $${remaining.toLocaleString()})`, consumedQuota: remaining, isWarning: true };
+                    let note = remaining === 0 
+                            ? `<span class="text-danger fw-bold d-block mt-1">⚠️ 年度額度已滿，已降為一般回饋 ($18/哩)</span>` 
+                            : `<span class="text-danger fw-bold d-block mt-1">⚠️ 單筆爆額度上限，超額部分僅享一般回饋 ($18/哩)</span>`;
+                    return { miles: bonusMiles + baseMiles, note: noteBase + note, consumedQuota: remaining, isWarning: true };
                 }
                 return { miles: Math.trunc(ctx.twdBase/18), note: (ctx.isForeign?'海外網購 $18':'一般消費 $18'), consumedQuota: 0 }; 
             } 
@@ -934,7 +958,7 @@
             if(!rateInput) return showCustomAlert('請輸入當下外幣匯率！');
             rate = parseFloat(rateInput); twdBase = Math.round(amt * rate); twdSpend = Math.round(twdBase * 1.015);
             
-            // 💡 渲染外幣試算看板
+            // 💡 外幣試算看板
             fxBoard.innerHTML = `
                 <div class="d-flex justify-content-between align-items-center mb-1">
                     <span class="text-secondary small fw-bold">外幣本金折合</span>
@@ -988,10 +1012,20 @@
             const integrityColor = '#10b981'; 
             const integrityText = '🟢 數據已核實';
 
-            // 💡 官方傳送門按鈕
+            // 💡 官方傳送門按鈕 (全面支援 ANA 與星盟)
             let linkHtml = '';
-            if(c.id.includes('ctbc_ci')) linkHtml = `<br><a href="https://www.china-airlines.com/" target="_blank" class="btn-airline-link">🌸 前往華航</a>`;
-            if(c.id === 'taishin_cx') linkHtml = `<br><a href="https://www.cathaypacific.com/" target="_blank" class="btn-airline-link" style="border-color:#86efac; color:#166534; background:#f0fdf4;">🌲 前往國泰</a>`;
+            if(c.id.includes('ctbc_ci')) linkHtml += `<br><a href="https://www.china-airlines.com/tw/zh/member/airline-miles/index" target="_blank" class="btn-airline-link mt-2">🌸 華航兌換</a>`;
+            if(c.id === 'taishin_cx') linkHtml += `<br><a href="https://flights.cathaypacific.com/zh_TW/offers/redeem-flights.html" target="_blank" class="btn-airline-link mt-2" style="border-color:#86efac; color:#166534; background:#f0fdf4;">🌲 國泰兌換</a>`;
+            
+            if(c.id.includes('hsbc') || c.name.toUpperCase().includes('ANA') || c.name.includes('全日空')) {
+                if(c.id.includes('hsbc')) {
+                    linkHtml += `<br><a href="https://www.hsbc.com.tw/credit-cards/rewards/travel/" target="_blank" class="btn-airline-link mt-2" style="border-color:#fca5a5; color:#dc2626; background:#fef2f2;">🏛️ 匯豐轉點</a>`;
+                } else {
+                    linkHtml += `<br>`;
+                }
+                linkHtml += ` <a href="https://www.ana.co.jp/zh/tw/amc/reference/tukau/award/int/terms.html" target="_blank" class="btn-airline-link mt-2" style="border-color:#bfdbfe; color:#1d4ed8; background:#eff6ff;">✈️ ANA 本家</a>`;
+                linkHtml += ` <a href="https://www.ana.co.jp/zh/tw/amc/reference/tukau/award/tk/terms.html" target="_blank" class="btn-airline-link mt-2" style="border-color:#fde047; color:#854d0e; background:#fef9c3;">🌟 ANA 星盟</a>`;
+            }
 
             const div = document.createElement('div'); div.className = `plan-card ${isWinner ? 'plan-winner' : ''} ${c.isWarning ? 'plan-warning' : ''}`;
             div.innerHTML = `
@@ -1188,7 +1222,8 @@
             
             if(chkCon) {
                 const isChecked = plannerSelectedAssets.has(idx) ? 'checked' : '';
-                chkCon.innerHTML += `<div class="switch-group mb-2"><span class="switch-label text-dark">${item.name} <small class="text-muted">(${miles.toLocaleString()}哩)</small></span><input class="form-check-input" type="checkbox" onchange="togglePlannerAsset(${idx}, this.checked)" ${isChecked}></div>`;
+                // 🛡️ 修正為 Label 原生點擊切換
+                chkCon.innerHTML += `<label class="switch-group mb-2"><span class="switch-label text-dark">${item.name} <small class="text-muted">(${miles.toLocaleString()}哩)</small></span><input class="form-check-input" type="checkbox" onchange="togglePlannerAsset(${idx}, this.checked)" ${isChecked}></label>`;
             }
         });
         
@@ -1273,23 +1308,31 @@
             let assetStr = db.warehouse.length === 0 ? '目前倉庫為空。' : db.warehouse.filter((_, idx) => plannerSelectedAssets.has(idx)).map(a => `- ${a.name}: ${a.current.toLocaleString()} (${a.targetAirline})`).join('\n');
             const fromStr = document.getElementById('planner-from').options[document.getElementById('planner-from').selectedIndex].text;
             const toStr = document.getElementById('planner-to').options[document.getElementById('planner-to').selectedIndex].text;
-
-            const engineLogic = mode === 'global' 
-                ? `請無視目標選單，主動掃描全局資產，尋找當前單哩價值（CPP）最高的 1~2 條「神仙航線」。` 
-                : `鎖定從 ${fromStr} 到 ${toStr} 的目標，精算達成率並提供「基準/聯盟/套利」三路徑建議。`;
-
-            const systemPrompt = `你是一名 2026 年頂尖航空哩程顧問。請以專業、客觀語氣進行分析。
-            ${engineLogic}
-            勾選資產清單：\n${assetStr}
             
-            輸出要求 (嚴格返回純 JSON 格式，不要加入 \`\`\`json 等任何 Markdown 標記)：
-            {
-              "level1_status": "一句話評估資產實力 (32px 大字)",
-              "level2_audit": [{"item": "規則項", "old": "舊比例", "new": "新比例", "status": "已核實"}],
-              "level3_routes": [{"title": "航線", "tags": ["#必經轉機:XX", "#地面區間", "哩程🟢", "稅金🟡"], "cost": "哩程數", "tax": "NT$區間", "desc": "策略說明"}],
-              "level4_decision": "琥珀金兵推指令",
-              "patch_json": ${githubToken ? '"GITHUB_PATCH_CODE"' : 'null'}
-            }`;
+            // 💡 動態抓取年份，確保未來永久免維護
+            const currentYear = new Date().getFullYear();
+
+            // 💡 終極防呆 Prompt，確保 AI 的邏輯嚴謹度與輸出規格
+            const engineLogic = mode === 'global' 
+                ? `【全局推薦模式】無視出發目的地。主動掃描以下資產，尋找全域 CPP (單哩價值) 最高的神仙航線（如假環球票或特定外站出發）。嚴禁提及無關航線的規避稅金手法（例如目的地非英國時，絕對不可提及避開英國 APD 稅）。` 
+                : `【指定航線模式】鎖定從「${fromStr}」到「${toStr}」的目標。必須具體給出以下三種方案對比：\n1. 基準直飛。\n2. 聯盟轉機。\n3. 開口/外站套利（若有斷頭行程，必須教導如何自行購買廉航或火車銜接）。\n若目標非英國，絕對不可提及英國 APD 稅。`;
+
+            const systemPrompt = `[角色任務]: 你是一名深耕 ${currentYear} 年航空哩程領域的頂尖顧問，專精於動態改表與航線規劃。
+[背景資訊]:
+- 使用者欲動用的資產清單: \n${assetStr}
+[具體指令]:
+1. ${engineLogic}
+2. 第 L4 點 (戰略決策推演) 必須結算「現有資產」與「目標消耗」的差額，並直接給出下一張該刷什麼卡的累積攻略。
+[約束條件]: 絕對嚴格返回純 JSON 格式，禁止任何 Markdown 標記 (\`\`\`json 等)。所有建議必須符合 ${currentYear} 年真實地理與航空常理。
+
+輸出格式範例:
+{
+  "level1_status": "一句話評估資產實力 (32px 大字)",
+  "level2_audit": [{"item": "規則項", "old": "舊比例", "new": "新比例", "status": "已核實"}],
+  "level3_routes": [{"title": "航線", "tags": ["#必經轉機:XX", "#地面區間", "哩程🟢", "稅金🟡"], "cost": "消耗數量", "tax": "NT$區間", "desc": "策略詳細說明 (含斷頭銜接法)"}],
+  "level4_decision": "後續刷卡與累積策略 (算出現有與目標的差距)",
+  "patch_json": ${githubToken ? '"GITHUB_PATCH_CODE"' : 'null'}
+}`;
 
             // 💡 升級：切換為 2026 最新 gemini-2.5-flash 模型
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
@@ -1340,7 +1383,7 @@
                 </div>
 
                 <div class="ai-level4-box shadow-sm mb-4">
-                    <div class="mb-2 text-warning fw-bold">戰略決策推演：琥珀金補強 (L4)</div>
+                    <div class="mb-2 text-warning fw-bold">戰略決策推演：後續補強攻略 (L4)</div>
                     <div style="font-weight:normal;">${res.level4_decision}</div>
                 </div>
                 ${res.patch_json ? `<div class="mt-3"><label class="small text-danger fw-bold">維護者 JSON 補丁</label><div class="ai-json-patch">${res.patch_json}</div></div>` : ''}
