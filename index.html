@@ -941,7 +941,7 @@
             } 
         }
     };
-    // ==========================================
+        // ==========================================
     // 4. 主計算邏輯與記帳系統
     // ==========================================
     function calculate() {
@@ -1278,7 +1278,7 @@
     }
 
     function delWarehouseAsset(idx) { if(confirm('確定要刪除這筆資產嗎？')) { const db = loadDB(); db.warehouse.splice(idx, 1); plannerSelectedAssets.delete(idx); saveDB(db); renderWarehouse(); } }
-    function togglePlannerAsset(idx, isChecked) { if(isChecked) plannerSelectedAssets.add(idx); else plannerSelectedAssets.delete(idx); runPlannerCalc(); } // 💡勾選時自動重算進度
+    function togglePlannerAsset(idx, isChecked) { if(isChecked) plannerSelectedAssets.add(idx); else plannerSelectedAssets.delete(idx); runPlannerCalc(); } 
 
     // ==========================================
     // 6. AI 雙引擎、規劃器與動態卡包掃描
@@ -1289,7 +1289,6 @@
         runPlannerCalc();
     }
 
-    // 💡 v14.3 手動試算區強勢回歸：動態比對資產進度與官方傳送門
     function runPlannerCalc() {
         const to = document.getElementById('planner-to').value;
         const isRt = document.getElementById('planner-trip-type').checked;
@@ -1335,7 +1334,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mt-2">
                         <div class="progress flex-grow-1 me-3" style="height: 6px;">
-                            <div class="progress-bar ${isEnough ? 'bg-success' : 'bg-warning'}" style="width: ${Math.min(100, (miles/baseMiles)*100)}%"></div>
+                            <div class="progress-bar ${isEnough ? 'bg-success' : 'bg-warning'}" style="width: ${Math.min(100, (Math.max(0, miles)/baseMiles)*100)}%"></div>
                         </div>
                         ${linkHtml}
                     </div>
@@ -1347,8 +1346,11 @@
         document.getElementById('planner-results-container').innerHTML = html + (selectedCount > 0 ? assetHtml : '');
     }
 
-    // 💡 v14.3 Markdown 解析器 (處理 AI 的粗體與斷行)
-    const formatMD = (str) => (str||'').replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary-dark">$1</strong>').replace(/\n/g, '<br>');
+    // 🛡️ v14.4 絕對防禦型 Markdown 解析器 (強制轉為字串)
+    const formatMD = (str) => {
+        let safeStr = str ? String(str) : '';
+        return safeStr.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary-dark">$1</strong>').replace(/\n/g, '<br>');
+    };
 
     async function startAIDiagnosis(mode) {
         const key = localStorage.getItem('GEMINI_API_KEY');
@@ -1372,7 +1374,6 @@
             const activeCards = db.settings.enabledBuiltins.map(id => BUILTIN_DEFS.find(d=>d.id===id)?.name || id).concat(db.customCards.map(c=>c.name)).join(', ') || '無設定卡片';
             const currentYear = new Date().getFullYear();
 
-            // 💡 v14.3 Prompt：強制加粗、限制長度、突顯負債
             const engineLogic = mode === 'global' 
                 ? `【全局推薦模式】主動掃描以下資產，尋找全域 CPP 最高的航線（如假環球票或特定外站出發）。嚴禁提及無關航線的稅金規避。` 
                 : `【指定航線模式】鎖定從「${fromStr}」到「${toStr}」的目標。必須給出三種方案：1.基準直飛。2.聯盟轉機。3.開口/外站套利。`;
@@ -1419,7 +1420,6 @@
             if (jsonStart !== -1 && jsonEnd !== -1) { aiText = aiText.substring(jsonStart, jsonEnd + 1); }
             const res = JSON.parse(aiText);
 
-            // 掃描戰報生成連結
             let aiLinksHtml = '';
             const reportStr = JSON.stringify(res).toUpperCase();
             if(reportStr.includes('華航') || reportStr.includes('中華航空')) aiLinksHtml += `<a href="https://www.china-airlines.com/tw/zh/member/airline-miles/index" target="_blank" class="btn-airline-link px-3">🌸 華航兌換</a>`;
@@ -1433,20 +1433,20 @@
             contentBox.innerHTML = `
                 <div class="ai-level1-card mb-4 shadow-sm" style="${mode === 'global' ? 'background:#1e293b;' : 'background:#0f172a;'}">
                     <div class="text-muted small mb-1">全局資產價值指標</div>
-                    <div class="fw-bold text-white" style="font-size: 1.3rem;">${res.level1_status}</div>
+                    <div class="fw-bold text-white" style="font-size: 1.3rem;">${formatMD(res.level1_status)}</div>
                 </div>
                 
                 <h6 class="fw-bold mb-3" style="color:#6d28d9;">實時政策規章審計 (L2)</h6>
                 <div class="mb-4">
-                    ${res.level2_audit.map(a => `<div class="d-flex justify-content-between border-bottom py-2 small"><span>${formatMD(a.item)}</span><span><s class="text-danger">${a.old}</s> ➔ <span class="text-success fw-bold">${a.new}</span></span></div>`).join('')}
+                    ${res.level2_audit.map(a => `<div class="d-flex justify-content-between border-bottom py-2 small"><span>${formatMD(a.item)}</span><span><s class="text-danger">${formatMD(a.old)}</s> ➔ <span class="text-success fw-bold">${formatMD(a.new)}</span></span></div>`).join('')}
                 </div>
 
                 <h6 class="fw-bold mb-3" style="color:#6d28d9;">優化提案與路徑指引 (L3)</h6>
                 <div class="mb-4">
                     ${res.level3_routes.map(r => `
                         <div class="card-box p-3 mb-3 border-0 shadow-sm" style="background:#f8fafc;">
-                            <div class="fw-bold fs-6 mb-2 text-dark">${r.title}</div>
-                            <div class="mb-2">${r.tags.map(t => `<span class="ai-tag ${t.includes('轉機')?'tag-hub':t.includes('地面')?'tag-ground':t.includes('哩程')?'tag-miles':'tag-tax'}">${t}</span>`).join('')}</div>
+                            <div class="fw-bold fs-6 mb-2 text-dark">${formatMD(r.title)}</div>
+                            <div class="mb-2">${r.tags.map(t => `<span class="ai-tag ${t.includes('轉機')?'tag-hub':t.includes('地面')?'tag-ground':t.includes('哩程')?'tag-miles':'tag-tax'}">${formatMD(t)}</span>`).join('')}</div>
                             <div class="d-flex justify-content-between small text-muted mb-2 pb-2 border-bottom fw-bold"><span>消耗: ${formatMD(r.cost)}</span><span>稅金: ${formatMD(r.tax)}</span></div>
                             <div class="small text-secondary mt-2" style="line-height:1.6;">${formatMD(r.desc)}</div>
                         </div>
